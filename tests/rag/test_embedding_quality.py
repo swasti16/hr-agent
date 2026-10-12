@@ -199,7 +199,8 @@ class TestEmbeddingModelConsistency:
         if not collections:
             pytest.skip("Vector store is empty — index documents first")
 
-        for colname in collections:
+        for col in collections:
+            colname = col if isinstance(col, str) else col.name
             collection = client.get_collection(name=colname)
 
             # Get a stored vector and check its dimension
